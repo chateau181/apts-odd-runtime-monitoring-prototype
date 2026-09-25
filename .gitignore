@@ -1,0 +1,27 @@
+# Virtual environment
+.venv/
+
+# PyCharm / JetBrains
+.idea/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Test and tool caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Coverage files
+.coverage
+htmlcov/
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+
+# Operating-system files
+.DS_Store
+Thumbs.db
