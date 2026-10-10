@@ -80,7 +80,7 @@ class SceneElement:
 
 
 @dataclass                   # In Semantic Mapping
-class MappingSpecification:  # pre-defined rules to check whether SceneElement can be mapped to Ontology
+class MappingSpecification:  # use pre-defined rules to check whether SceneElement can be mapped to Ontology
     mapping_id: str
 
     scene_attribute: str
@@ -97,7 +97,7 @@ class MappingSpecification:  # pre-defined rules to check whether SceneElement c
 
 
 @dataclass
-class MappingResult: #Result of Semantic Mapping
+class MappingResult: # Pre-runtime specification used by Semantic Mapping.
     scene_element_id: str
     mapping_status: MappingStatus
 
@@ -111,7 +111,7 @@ class MappingResult: #Result of Semantic Mapping
 
 
 @dataclass
-class CheckingCondition:  # pre-defined Rules of How to check
+class CheckingCondition:  # Pre-runtime rule definition used by Checking.
     condition_id: str
     name: str
     checked_attribute: str

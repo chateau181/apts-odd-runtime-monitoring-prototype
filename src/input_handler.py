@@ -2,6 +2,8 @@ from typing import Any
 
 from src.models import InformationStatus, NormalizedRuntimeInformation
 
+# configuration dictionary
+# when a raw attribute is seen, how to explain it
 INPUT_SPECIFICATIONS: dict[str, dict[str, Any]] = {
     "transport_type": {
         "entity": "Transport",
@@ -14,11 +16,11 @@ INPUT_SPECIFICATIONS: dict[str, dict[str, Any]] = {
         "temporal_characteristic": "contextual",
     },
     "vehicle_speed": {
-    "entity": "APTS_Vehicle",
-    "value_type": "number",
-    "unit_key": "speed_unit",
-    "expected_unit": "m/s",
-    "temporal_characteristic": "dynamic",
+        "entity": "APTS_Vehicle",
+        "value_type": "number",
+        "unit_key": "speed_unit",
+        "expected_unit": "m/s",
+        "temporal_characteristic": "dynamic",
     },
     "surface_condition": {
         "entity": "Environment",
@@ -33,11 +35,11 @@ INPUT_SPECIFICATIONS: dict[str, dict[str, Any]] = {
         "temporal_characteristic": "contextual",
     },
     "heart_rate": {
-    "entity": "Patient",
-    "value_type": "number",
-    "unit_key": "heart_rate_unit",
-    "expected_unit": "bpm",
-    "temporal_characteristic": "dynamic",
+        "entity": "Patient",
+        "value_type": "number",
+        "unit_key": "heart_rate_unit",
+        "expected_unit": "bpm",
+        "temporal_characteristic": "dynamic",
     },
 }
 
