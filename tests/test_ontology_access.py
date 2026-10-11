@@ -1,11 +1,11 @@
 from rdflib.namespace import OWL
 
 from src.ontology_access import (
+    build_ontology_uri,
+    get_ontology_element_type,
     get_ontology_types,
     load_ontology,
     ontology_element_exists,
-    get_ontology_element_type,
-    build_ontology_uri,
 )
 
 
