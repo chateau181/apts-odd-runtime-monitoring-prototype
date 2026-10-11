@@ -6,6 +6,7 @@ from src.ontology_access import (
     get_ontology_types,
     load_ontology,
     ontology_element_exists,
+    ontology_element_is_predicate,
 )
 
 
@@ -94,4 +95,20 @@ def test_build_ontology_uri():
     assert str(uri) == (
         "http://www.semanticweb.org/tim/ontologies/"
         "2026/3/untitled-ontology-32#Wet"
+    )
+
+def test_has_heart_frequency_is_used_as_predicate():
+    graph = load_ontology()
+
+    assert ontology_element_is_predicate(
+        graph,
+        "hasHeartFrequency",
+    )
+
+def test_wet_is_not_used_as_predicate():
+    graph = load_ontology()
+
+    assert not ontology_element_is_predicate(
+        graph,
+        "Wet",
     )

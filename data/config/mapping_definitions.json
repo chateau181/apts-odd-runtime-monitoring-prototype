@@ -1,0 +1,54 @@
+[
+  {
+    "mapping_id": "M-01",
+    "scene_attribute": "transport_type",
+    "scene_value": "Patient_transport",
+    "ontology_reference": "Patient_transport",
+    "ontology_element_type": "NamedIndividual",
+    "mapping_type": "Direct"
+  },
+  {
+    "mapping_id": "M-02",
+    "scene_attribute": "current_area",
+    "scene_value": "Corridor",
+    "ontology_reference": "Corridor",
+    "ontology_element_type": "Class",
+    "mapping_type": "Direct"
+  },
+  {
+    "mapping_id": "M-03",
+    "scene_attribute": "surface_condition",
+    "scene_value": "Wet",
+    "ontology_reference": "Wet",
+    "ontology_element_type": "NamedIndividual",
+    "mapping_type": "Direct"
+  },
+  {
+    "mapping_id": "M-04",
+    "scene_attribute": "age",
+    "scene_entity": "Patient",
+    "ontology_reference": "Age_scalar",
+    "ontology_element_type": "Class",
+    "mapping_type": "Structured / context-dependent",
+    "supporting_ontology_references": {
+      "relation": "hasAge",
+      "value_property": "ageValue"
+    }
+  },
+  {
+    "mapping_id": "M-05",
+    "scene_attribute": "vehicle_speed",
+    "scene_entity": "APTS_Vehicle",
+    "ontology_reference": "speedValue",
+    "ontology_element_type": "DatatypeProperty",
+    "mapping_type": "Structured / context-dependent"
+  },
+  {
+    "mapping_id": "M-06",
+    "scene_attribute": "heart_rate",
+    "scene_entity": "Patient",
+    "ontology_reference": "hasHeartFrequency",
+    "ontology_element_type": "RDFPredicate",
+    "mapping_type": "Structured / context-dependent"
+  }
+]

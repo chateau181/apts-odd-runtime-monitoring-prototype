@@ -44,6 +44,7 @@ def get_ontology_types(
         )
     )
 
+
 def get_ontology_element_type(
     graph: Graph,
     local_name: str,
@@ -66,3 +67,13 @@ def get_ontology_element_type(
         return "RDFProperty"
 
     return None
+
+def ontology_element_is_predicate(
+    graph: Graph,
+    local_name: str,
+) -> bool:
+    """Return whether the ontology URI occurs in predicate position."""
+    element_uri = build_ontology_uri(local_name)
+    # RDF triples follow Subject-Predicate-Object order. None acts as a
+    # wildcard here, so this query asks whether element_uri occurs as Predicate.
+    return (None, element_uri, None) in graph
