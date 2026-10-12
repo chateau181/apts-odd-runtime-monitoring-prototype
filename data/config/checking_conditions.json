@@ -1,0 +1,52 @@
+[
+  {
+    "condition_id": "A-01",
+    "name": "Adult resting heart rate range",
+    "checked_attribute": "heart_rate",
+    "required_attributes": [
+      "heart_rate",
+      "age"
+    ],
+    "operator": "Range inclusive",
+    "applicability_context": {
+      "transport_type": "Patient_transport"
+    },
+    "unit": "bpm",
+    "minimum": 60,
+    "maximum": 100,
+    "provenance": "Source-supported adult resting heart-rate reference range adopted for the prototype.",
+    "assumption_status": "Explicit prototype assumption: the range is applied to the predefined synthetic adult context."
+  },
+  {
+    "condition_id": "A-02",
+    "name": "Wet surface prohibition",
+    "checked_attribute": "surface_condition",
+    "required_attributes": [
+      "surface_condition"
+    ],
+    "operator": "Prohibited state",
+    "applicability_context": {
+      "transport_type": "Patient_transport"
+    },
+    "activation_attribute": "surface_condition",
+    "prohibited_state": "Wet",
+    "provenance": "Project-specific prototype checking rule for the selected surface condition.",
+    "assumption_status": "Explicit project assumption: Wet is treated as a prohibited surface state."
+  },
+  {
+    "condition_id": "A-03",
+    "name": "APTS vehicle speed limit",
+    "checked_attribute": "vehicle_speed",
+    "required_attributes": [
+      "vehicle_speed"
+    ],
+    "operator": "Less than or equal",
+    "applicability_context": {
+      "transport_type": "Patient_transport"
+    },
+    "unit": "m/s",
+    "maximum": 1.5,
+    "provenance": "Source-supported APTS platform speed value adopted for the prototype.",
+    "assumption_status": "Design decision: 1.5 m/s is used as the prototype ODD checking threshold and is not treated as a validated ODD boundary."
+  }
+]
