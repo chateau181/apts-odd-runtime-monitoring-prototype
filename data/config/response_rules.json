@@ -1,0 +1,15 @@
+{
+  "inside_odd": "None",
+  "unresolved": "Clarification",
+  "violated_conditions": {
+    "A-01": "Review",
+    "A-02": "Intervention",
+    "A-03": "Intervention"
+  },
+   "priority": [
+    "Intervention",
+    "Review",
+    "Clarification",
+    "None"
+  ]
+}

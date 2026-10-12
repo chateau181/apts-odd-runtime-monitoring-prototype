@@ -194,3 +194,26 @@ Automated tests provide repeatable evidence that implemented behaviour matches t
 defined monitoring semantics and evaluation cases.
 
 **Status:** Accepted
+
+---
+
+## D-013 — Minimal prototype response policy and primary response selection
+
+The minimal prototype uses the following predefined response policy:
+
+- Inside ODD → None
+- Unresolved condition → Clarification
+- A-01 Heart Rate violation → Review
+- A-02 Wet surface violation → Intervention
+- A-03 Vehicle Speed violation → Intervention
+
+These assignments are prototype-specific response design decisions and do not
+represent validated hospital operational, clinical, or emergency procedures.
+
+The MonitoringResult stores one primary ResponseType. If multiple response
+needs coexist, the predefined priority is:
+
+Intervention > Review > Clarification > None
+
+All underlying ConditionResults, including lower-priority response needs,
+unresolved conditions and their reasons, remain preserved for traceability.
