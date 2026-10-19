@@ -12,6 +12,8 @@ from src.models import (
     MonitoringResult,
     NormalizedRuntimeInformation,
     ResponseType,
+    RuntimeScenario,
+    ScenarioCycle,
     SceneElement,
 )
 
@@ -194,3 +196,33 @@ def test_condition_operator_values():
     assert ConditionOperator.RANGE_INCLUSIVE.value == "Range inclusive"
     assert ConditionOperator.LESS_EQUAL.value == "Less than or equal"
     assert ConditionOperator.PROHIBITED_STATE.value == "Prohibited state"
+
+def test_scenario_cycle_stores_raw_snapshot():
+    snapshot = {
+        "vehicle_speed": 1.2,
+        "speed_unit": "m/s",
+    }
+
+    scenario_cycle = ScenarioCycle(
+        cycle=1,
+        snapshot=snapshot,
+    )
+
+    assert scenario_cycle.cycle == 1
+    assert scenario_cycle.snapshot == snapshot
+
+def test_runtime_scenario_contains_cycles():
+    scenario_cycle = ScenarioCycle(
+        cycle=1,
+        snapshot={"vehicle_speed": 1.2},
+    )
+
+    scenario = RuntimeScenario(
+        scenario_id="DS-01",
+        description="Test scenario",
+        cycles=[scenario_cycle],
+    )
+
+    assert scenario.scenario_id == "DS-01"
+    assert scenario.description == "Test scenario"
+    assert scenario.cycles == [scenario_cycle]

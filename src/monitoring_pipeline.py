@@ -19,6 +19,7 @@ from src.input_handler import normalize_runtime_snapshot
 from src.models import (
     CheckingCondition,
     MappingSpecification,
+    MonitoringCycleTrace,
     MonitoringResult,
 )
 from src.monitoring_output import (
@@ -59,10 +60,25 @@ def run_monitoring_cycle(
     cycle: int,
     resources: MonitoringResources,
 ) -> MonitoringResult:
-    """Process one runtime snapshot through the complete monitoring pipeline."""
+    """Process one runtime snapshot and return its final monitoring result."""
 
-    # Each call evaluates one independent runtime snapshot. The minimal prototype
-    # does not perform temporal-history reasoning or prediction across cycles.
+    trace = run_monitoring_cycle_with_trace(
+        snapshot=snapshot,
+        scenario_id=scenario_id,
+        cycle=cycle,
+        resources=resources,
+    )
+
+    return trace.monitoring_result
+
+def run_monitoring_cycle_with_trace(
+    snapshot: dict[str, Any],
+    scenario_id: str,
+    cycle: int,
+    resources: MonitoringResources,
+) -> MonitoringCycleTrace:
+    """Process one runtime snapshot and preserve the complete execution trace."""
+
     normalized_information = normalize_runtime_snapshot(
         snapshot=snapshot,
         cycle=cycle,
@@ -88,10 +104,21 @@ def run_monitoring_cycle(
         condition_results=condition_results,
     )
 
-    return build_monitoring_result(
+    monitoring_result = build_monitoring_result(
         scenario_id=scenario_id,
         cycle=cycle,
         assessment=assessment,
         condition_results=condition_results,
         policy=resources.response_policy,
+    )
+
+    return MonitoringCycleTrace(
+        scenario_id=scenario_id,
+        cycle=cycle,
+        raw_snapshot=snapshot.copy(),
+        normalized_information=normalized_information,
+        scene_elements=scene_elements,
+        mapping_results=mapping_results,
+        condition_results=condition_results,
+        monitoring_result=monitoring_result,
     )

@@ -150,3 +150,32 @@ class MonitoringResult:
 
     condition_results: list[ConditionResult] = field(default_factory=list)
     summary: str | None = None
+
+@dataclass
+class MonitoringCycleTrace:
+    scenario_id: str
+    cycle: int
+    raw_snapshot: dict[str, Any]
+    normalized_information: list[NormalizedRuntimeInformation]
+    scene_elements: list[SceneElement]
+    mapping_results: list[MappingResult]
+    condition_results: list[ConditionResult]
+    monitoring_result: MonitoringResult
+
+@dataclass
+class ScenarioCycle:
+    cycle: int
+    snapshot: dict[str, Any]
+
+
+@dataclass
+class RuntimeScenario:
+    scenario_id: str
+    description: str
+    cycles: list[ScenarioCycle] = field(default_factory=list)
+
+@dataclass
+class ScenarioExecutionResult:
+    scenario_id: str
+    description: str
+    cycle_traces: list[MonitoringCycleTrace] = field(default_factory=list)

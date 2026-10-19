@@ -6,6 +6,7 @@ from src.models import (
 from src.monitoring_pipeline import (
     load_monitoring_resources,
     run_monitoring_cycle,
+    run_monitoring_cycle_with_trace,
 )
 
 
@@ -218,4 +219,87 @@ def test_end_to_end_heart_rate_violation_uses_review():
         condition.condition_id == "A-01"
         and condition.condition_status == ConditionStatus.VIOLATED
         for condition in result.condition_results
+    )
+
+def test_end_to_end_trace_preserves_all_processing_stages():
+    resources = load_monitoring_resources()
+
+    snapshot = {
+        "transport_type": "Patient_transport",
+        "current_area": "Corridor",
+        "vehicle_speed": 1.2,
+        "speed_unit": "m/s",
+        "age": 45,
+        "heart_rate": 85,
+        "heart_rate_unit": "bpm",
+    }
+
+    trace = run_monitoring_cycle_with_trace(
+        snapshot=snapshot,
+        scenario_id="DS-01",
+        cycle=1,
+        resources=resources,
+    )
+
+    assert trace.scenario_id == "DS-01"
+    assert trace.cycle == 1
+    assert trace.raw_snapshot == snapshot
+
+    assert trace.normalized_information
+    assert trace.scene_elements
+    assert trace.mapping_results
+    assert trace.condition_results
+
+    assert (
+        trace.monitoring_result.assessment
+        == AssessmentState.INSIDE_ODD
+    )
+    assert trace.monitoring_result.response == ResponseType.NONE
+
+def test_trace_links_vehicle_speed_through_mapping_and_checking():
+    resources = load_monitoring_resources()
+
+    snapshot = {
+        "transport_type": "Patient_transport",
+        "current_area": "Corridor",
+        "vehicle_speed": 1.6,
+        "speed_unit": "m/s",
+        "age": 45,
+        "heart_rate": 85,
+        "heart_rate_unit": "bpm",
+    }
+
+    trace = run_monitoring_cycle_with_trace(
+        snapshot=snapshot,
+        scenario_id="DS-01",
+        cycle=2,
+        resources=resources,
+    )
+
+    speed_scene_element = next(
+        element
+        for element in trace.scene_elements
+        if element.attribute == "vehicle_speed"
+    )
+
+    speed_mapping = next(
+        mapping
+        for mapping in trace.mapping_results
+        if mapping.scene_element_id
+        == speed_scene_element.scene_element_id
+    )
+
+    speed_condition = next(
+        condition
+        for condition in trace.condition_results
+        if condition.condition_id == "A-03"
+    )
+
+    assert speed_scene_element.value == 1.6
+    assert speed_mapping.ontology_reference == "speedValue"
+    assert speed_condition.condition_status == ConditionStatus.VIOLATED
+
+    assert (
+        trace.monitoring_result.assessment
+        == AssessmentState.OUTSIDE_ODD
     )

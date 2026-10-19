@@ -1,0 +1,19 @@
+{
+  "scenario_id": "EC-Mixed",
+  "description": "Mixed edge case with missing heart rate and a Wet surface violation.",
+  "cycles": [
+    {
+      "cycle": 1,
+      "snapshot": {
+        "transport_type": "Patient_transport",
+        "current_area": "Corridor",
+        "vehicle_speed": 1.2,
+        "speed_unit": "m/s",
+        "surface_condition": "Wet",
+        "age": 45,
+        "heart_rate": null,
+        "heart_rate_unit": "bpm"
+      }
+    }
+  ]
+}

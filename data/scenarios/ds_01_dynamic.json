@@ -1,0 +1,67 @@
+{
+  "scenario_id": "DS-01",
+  "description": "Predefined dynamic patient transport scenario for the minimal prototype.",
+  "cycles": [
+    {
+      "cycle": 1,
+      "snapshot": {
+        "transport_type": "Patient_transport",
+        "current_area": "Corridor",
+        "vehicle_speed": 1.2,
+        "speed_unit": "m/s",
+        "age": 45,
+        "heart_rate": 85,
+        "heart_rate_unit": "bpm"
+      }
+    },
+    {
+      "cycle": 2,
+      "snapshot": {
+        "transport_type": "Patient_transport",
+        "current_area": "Corridor",
+        "vehicle_speed": 1.6,
+        "speed_unit": "m/s",
+        "age": 45,
+        "heart_rate": 85,
+        "heart_rate_unit": "bpm"
+      }
+    },
+    {
+      "cycle": 3,
+      "snapshot": {
+        "transport_type": "Patient_transport",
+        "current_area": "Corridor",
+        "vehicle_speed": 1.2,
+        "speed_unit": "m/s",
+        "age": 45,
+        "heart_rate": null,
+        "heart_rate_unit": "bpm"
+      }
+    },
+    {
+      "cycle": 4,
+      "snapshot": {
+        "transport_type": "Patient_transport",
+        "current_area": "Corridor",
+        "vehicle_speed": 1.2,
+        "speed_unit": "m/s",
+        "surface_condition": "Wet",
+        "age": 45,
+        "heart_rate": 85,
+        "heart_rate_unit": "bpm"
+      }
+    },
+    {
+      "cycle": 5,
+      "snapshot": {
+        "transport_type": "Patient_transport",
+        "current_area": "Corridor",
+        "vehicle_speed": 1.2,
+        "speed_unit": "m/s",
+        "age": 45,
+        "heart_rate": 85,
+        "heart_rate_unit": "bpm"
+      }
+    }
+  ]
+}
