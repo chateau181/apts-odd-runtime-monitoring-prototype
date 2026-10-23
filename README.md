@@ -1,5 +1,7 @@
 # APTS ODD Runtime Monitoring Prototype
 
+[![CI](https://github.com/chateau181/apts-odd-runtime-monitoring-prototype/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/chateau181/apts-odd-runtime-monitoring-prototype/actions/workflows/ci.yml)
+
 A minimal Python demonstrator for ontology-supported runtime monitoring of selected Operational Design Domain (ODD) conditions for an Automated Patient Transport System (APTS).
 
 The prototype demonstrates how heterogeneous runtime information can be transformed into a structured scene representation, semantically related to an existing ontology-based ODD model, evaluated using predefined Checking Conditions, and aggregated into a traceable overall monitoring result.
